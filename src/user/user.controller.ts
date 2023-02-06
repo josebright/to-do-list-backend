@@ -8,7 +8,7 @@ import {
 import { UserJwtGuard, AdminRoleGuard } from '../auth/guard';
 import { UserService } from './user.service';
 
-@Controller('users')
+@Controller('api/users')
 export class UserController {
     constructor(private readonly usersService: UserService) {}
     
