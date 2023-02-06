@@ -5,7 +5,7 @@ import {
     Req, 
     UseGuards,
 } from '@nestjs/common';
-import { UserJwtGuard, AdminJwtGuard } from '../auth/guard';
+import { UserJwtGuard, AdminRoleGuard } from '../auth/guard';
 import { UserService } from './user.service';
 
 @Controller('users')
@@ -21,7 +21,7 @@ export class UserController {
         return this.usersService.getUser(params.id, req);
     }
 
-    @UseGuards(AdminJwtGuard) 
+    @UseGuards(AdminRoleGuard) 
     @Get()
     getAllUsers() {
         return this.usersService.getAllUsers()

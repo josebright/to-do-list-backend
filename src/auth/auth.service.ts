@@ -105,7 +105,7 @@ export class AuthService {
         const token = await this.jwt.signAsync(
             payload, 
             {
-                expiresIn: '7d',
+                expiresIn: '2d',
                 secret: secret,
             },
         );
