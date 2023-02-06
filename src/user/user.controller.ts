@@ -1,6 +1,7 @@
 import { 
     Controller, 
     Get, 
+    Delete,
     Param, 
     Req, 
     UseGuards,
@@ -25,5 +26,13 @@ export class UserController {
     @Get()
     getAllUsers() {
         return this.usersService.getAllUsers()
+    }
+
+    @UseGuards(AdminRoleGuard)
+    @Delete(':id')
+    deleteUser(
+        @Param() params: { id: string },
+        ) {
+        return this.usersService.deleteUser(params.id);
     }
 }
