@@ -41,7 +41,7 @@ export class UserService {
                     email: true,
                     toDoList: true,
                     history: true,
-                    isAdmin: true,
+                    role: true,
                 }
             }
         )
