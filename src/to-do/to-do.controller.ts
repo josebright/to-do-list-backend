@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { 
+  Controller, 
+  Get, 
+  Post, 
+  Body,
+  Req, 
+  Res, 
+  Patch, 
+  Param, 
+  Delete 
+} from '@nestjs/common';
 import { ToDoService } from './to-do.service';
 import { CreateToDoDto, UpdateToDoDto } from './dto';
 
@@ -7,8 +17,13 @@ export class ToDoController {
   constructor(private readonly toDoService: ToDoService) {}
 
   @Post()
-  create(@Body() createToDoDto: CreateToDoDto) {
-    return this.toDoService.create(createToDoDto);
+  create(
+    @Body() dto: CreateToDoDto, @Res() res
+  ) {
+    return this.toDoService.create(
+      dto, 
+      res
+    );
   }
 
   @Get()

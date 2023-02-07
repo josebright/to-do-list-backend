@@ -1,10 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { CreateToDoDto, UpdateToDoDto } from './dto';
+import { Request, Response } from 'express';
+import { PrismaService } from '../prisma/prisma.service';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+
 
 @Injectable()
 export class ToDoService {
-  create(createToDoDto: CreateToDoDto) {
-    return 'This action adds a new toDo';
+  constructor(
+    private prisma: PrismaService,
+  ) {}
+
+  async create(
+    dto: CreateToDoDto,
+    res: Response
+  ) {
+    const { items } = dto
+    try {
+      await this.prisma.toDoList.create({
+          data: {
+            user: {
+              
+            },
+            items,
+          }
+      });
+
+      return res.send({
+          message: 'List created succefully'
+      });
+
+    } catch (error) {
+
+      throw error;
+    }
   }
 
   findAll() {
