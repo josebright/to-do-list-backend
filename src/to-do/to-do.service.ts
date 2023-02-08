@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateToDoDto, UpdateToDoDto } from './dto';
 import { Request, Response } from 'express';
 import { PrismaService } from '../prisma/prisma.service';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import jwt_decode from "jwt-decode";
 
 
 @Injectable()
@@ -13,28 +13,29 @@ export class ToDoService {
 
   async create(
     dto: CreateToDoDto,
-    res: Response
+    req: Request
   ) {
-    const { items } = dto
+    const decoded: object = jwt_decode(req.cookies.token);
+    const decodedUser = decoded as { id: string, email: string }
+    const { item } = dto
     try {
-      await this.prisma.toDoList.create({
+      await this.prisma.listItem.create({
           data: {
-            user: {
-              
-            },
-            items,
+            userId: decodedUser.id,
+            item,
           }
       });
 
-      return res.send({
+      return {
           message: 'List created succefully'
-      });
+      };
 
     } catch (error) {
 
       throw error;
     }
   }
+  
 
   findAll() {
     return `This action returns all toDo`;
