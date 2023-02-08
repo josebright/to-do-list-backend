@@ -3,26 +3,29 @@ import {
   Get, 
   Post, 
   Body,
-  Req, 
-  Res, 
+  Req,
   Patch, 
   Param, 
-  Delete 
+  Delete,
+  UseGuards 
 } from '@nestjs/common';
 import { ToDoService } from './to-do.service';
 import { CreateToDoDto, UpdateToDoDto } from './dto';
+import { UserJwtGuard, AdminRoleGuard } from '../auth/guard';
+
 
 @Controller('api/to-do')
 export class ToDoController {
   constructor(private readonly toDoService: ToDoService) {}
 
+  @UseGuards(UserJwtGuard)
   @Post()
   create(
-    @Body() dto: CreateToDoDto, @Res() res
+    @Body() dto: CreateToDoDto, @Req() req
   ) {
     return this.toDoService.create(
       dto, 
-      res
+      req
     );
   }
 

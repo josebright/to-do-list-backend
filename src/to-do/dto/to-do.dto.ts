@@ -10,7 +10,7 @@ export class CreateToDoDto {
     @IsNotEmpty()
     @MaxLength(255)
     @IsString()
-    items: string;
+    item: string;
 }
 
 

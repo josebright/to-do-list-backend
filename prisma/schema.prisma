@@ -14,31 +14,29 @@ model User {
   id String @unique @default(uuid())
   email String @unique
   password String
-  toDoList ToDoList?
-  history TranslateHistory?
+  list ListItem?
   role Role @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@map("users")
 }
 
-model ToDoList {
+model ListItem {
   id String @unique @default(uuid())
-  items String
+  item String
   hasClickedTranslate Boolean @default(false)
+  translatedList TranslatedItem?
   user User @relation(fields: [userId], references: [id])
   userId String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model TranslateHistory {
+model TranslatedItem {
   id String @unique @default(uuid())
-  translatedItems String
+  translatedItem String
   language String
-  user User @relation(fields: [userId], references: [id])
-  userId String @unique
+  item ListItem @relation(fields: [itemId], references: [id])
+  itemId String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

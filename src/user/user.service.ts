@@ -39,8 +39,7 @@ export class UserService {
                 select: {
                     id: true,
                     email: true,
-                    toDoList: true,
-                    history: true,
+                    list: true,
                     role: true,
                 }
             }
