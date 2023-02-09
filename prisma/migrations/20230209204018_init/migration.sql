@@ -20,17 +20,8 @@ CREATE TABLE "ListItem" (
     "item" TEXT NOT NULL,
     "hasClickedTranslate" BOOLEAN NOT NULL DEFAULT false,
     "status" "Status" NOT NULL DEFAULT 'PENDING',
+    "translatedList" JSONB[],
     "userId" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL
-);
-
--- CreateTable
-CREATE TABLE "TranslatedItem" (
-    "id" TEXT NOT NULL,
-    "translatedItem" TEXT NOT NULL,
-    "language" TEXT NOT NULL,
-    "listId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL
 );
@@ -44,11 +35,5 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 -- CreateIndex
 CREATE UNIQUE INDEX "ListItem_id_key" ON "ListItem"("id");
 
--- CreateIndex
-CREATE UNIQUE INDEX "TranslatedItem_id_key" ON "TranslatedItem"("id");
-
 -- AddForeignKey
 ALTER TABLE "ListItem" ADD CONSTRAINT "ListItem_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "TranslatedItem" ADD CONSTRAINT "TranslatedItem_listId_fkey" FOREIGN KEY ("listId") REFERENCES "ListItem"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

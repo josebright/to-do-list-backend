@@ -21,20 +21,17 @@ export class ToDoService {
       email: string;
     };
     const { item } = dto;
-    try {
-      await this.prisma.listItem.create({
-        data: {
-          userId: decodedUser.id,
-          item,
-        },
-      });
 
-      return {
-        message: 'List created succefully',
-      };
-    } catch (error) {
-      throw error;
-    }
+    await this.prisma.listItem.create({
+      data: {
+        userId: decodedUser.id,
+        item,
+      },
+    });
+
+    return {
+      message: 'List created succefully',
+    };
   }
 
   async findUserList(req: Request) {
@@ -53,10 +50,8 @@ export class ToDoService {
         },
       });
 
-    if (!lists) {
-      throw new NotFoundException(
-        'List not found',
-      );
+    if (lists.length === 0) {
+      return { message: 'List is empty' };
     }
 
     return { lists };
