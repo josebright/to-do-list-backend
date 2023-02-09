@@ -9,10 +9,10 @@ import { ToDoModule } from './to-do/to-do.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-    }), 
-    AuthModule, 
-    UserModule, 
-    PrismaModule, 
+    }),
+    AuthModule,
+    UserModule,
+    PrismaModule,
     ToDoModule,
   ],
 })
