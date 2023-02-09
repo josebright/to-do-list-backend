@@ -1,19 +1,12 @@
-import { 
-    IsNotEmpty, 
-    IsString,
-    MaxLength,
-} from "class-validator";
-import { PartialType } from '@nestjs/mapped-types';
+import {
+  IsNotEmpty,
+  IsString,
+  MaxLength,
+} from 'class-validator';
 
-
-export class CreateToDoDto {
-    @IsNotEmpty()
-    @MaxLength(255)
-    @IsString()
-    item: string;
-}
-
-
-export class UpdateToDoDto extends PartialType(CreateToDoDto) {
-    
+export class Dto {
+  @IsNotEmpty()
+  @MaxLength(255)
+  @IsString()
+  item: string;
 }

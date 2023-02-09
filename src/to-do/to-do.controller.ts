@@ -1,51 +1,58 @@
-import { 
-  Controller, 
-  Get, 
-  Post, 
+import {
+  Controller,
+  Get,
+  Post,
   Body,
   Req,
-  Patch, 
-  Param, 
+  Patch,
+  Param,
   Delete,
-  UseGuards 
+  UseGuards,
 } from '@nestjs/common';
 import { ToDoService } from './to-do.service';
-import { CreateToDoDto, UpdateToDoDto } from './dto';
-import { UserJwtGuard, AdminRoleGuard } from '../auth/guard';
-
+import { Dto } from './dto';
+import { UserJwtGuard } from '../auth/guard';
 
 @Controller('api/to-do')
 export class ToDoController {
-  constructor(private readonly toDoService: ToDoService) {}
+  constructor(
+    private readonly toDoService: ToDoService,
+  ) {}
 
   @UseGuards(UserJwtGuard)
   @Post()
-  create(
-    @Body() dto: CreateToDoDto, @Req() req
+  createList(@Body() dto: Dto, @Req() req) {
+    return this.toDoService.createList(dto, req);
+  }
+
+  @UseGuards(UserJwtGuard)
+  @Get()
+  findUserList(@Req() req) {
+    return this.toDoService.findUserList(req);
+  }
+
+  @UseGuards(UserJwtGuard)
+  @Get(':id')
+  findOneList(
+    @Param() params: { id: string },
+    @Req() req,
   ) {
-    return this.toDoService.create(
-      dto, 
-      req
+    return this.toDoService.findOneList(
+      params.id,
+      req,
     );
   }
 
-  @Get()
-  findAll() {
-    return this.toDoService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.toDoService.findOne(+id);
-  }
-
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateToDoDto: UpdateToDoDto) {
-    return this.toDoService.update(+id, updateToDoDto);
+  updateList(
+    @Param('id') id: string,
+    @Body() dto: Dto,
+  ) {
+    return this.toDoService.updateList(id, dto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.toDoService.remove(+id);
+  deleteList(@Param('id') id: string) {
+    return this.toDoService.deleteList(id);
   }
 }
