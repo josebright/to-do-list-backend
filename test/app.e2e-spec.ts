@@ -109,9 +109,8 @@ describe('App e2e', () => {
           .withBody(dto)
           .expectStatus(200)
           .stores('userAt', 'token')
-          .stores('userId', 'user.id')
+          .stores('userId', 'user.id');
       });
-      
     });
 
     describe('Signout', () => {
@@ -119,14 +118,13 @@ describe('App e2e', () => {
         return pactum
           .spec()
           .post('/auth/signout')
-          .expectStatus(200)
-          .clean
+          .expectStatus(200).clean;
       });
     });
   });
 
   describe('User', () => {
-      describe('Get user', () => {
+    describe('Get user', () => {
       it('should get current user', () => {
         return pactum
           .spec()
@@ -135,19 +133,21 @@ describe('App e2e', () => {
           .withHeaders({
             Authorization: 'Bearer $S{userAt}',
           })
-          .expectStatus(200)
+          .expectStatus(200);
       });
     });
 
     describe('Get all users', () => {
       it('should get all users', () => {
-        return pactum
-          .spec()
-          .get('/users')
-          // .withHeaders({
-          //   Authorization: 'Bearer $S{userAt}',
-          // })
-          .expectStatus(200)
+        return (
+          pactum
+            .spec()
+            .get('/users')
+            // .withHeaders({
+            //   Authorization: 'Bearer $S{userAt}',
+            // })
+            .expectStatus(200)
+        );
       });
     });
   });

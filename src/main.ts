@@ -7,12 +7,15 @@ import * as passport from 'passport';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+    }),
+  );
   app.use(
     session({
-      secret: 'asiodasjoddjdoasddasoidjasiodasdjaiodd',
+      secret:
+        'asiodasjoddjdoasddasoidjasiodasdjaiodd',
       saveUninitialized: false,
       resave: false,
       cookie: {
@@ -23,6 +26,10 @@ async function bootstrap() {
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(cookieParser());
-  await app.listen(process.env.PORT ? parseInt(process.env.PORT) : 3000);
+  await app.listen(
+    process.env.PORT
+      ? parseInt(process.env.PORT)
+      : 3000,
+  );
 }
 bootstrap();
