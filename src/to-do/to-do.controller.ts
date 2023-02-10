@@ -13,8 +13,10 @@ import { ToDoService } from './to-do.service';
 import { createDto, updateDto } from './dto';
 import {
   UserJwtGuard,
-  AdminRoleGuard,
+  RolesGuard,
+  Roles,
 } from '../auth/guard';
+import { UserRoles } from 'src/user/enums';
 
 @Controller('api/to-do')
 export class ToDoController {
@@ -34,7 +36,8 @@ export class ToDoController {
     return this.toDoService.findUserList(req);
   }
 
-  @UseGuards(AdminRoleGuard)
+  @UseGuards(UserJwtGuard, RolesGuard)
+  @Roles(UserRoles.ADMIN) //Only Admin user can access
   @Get('lists')
   findAllUserList() {
     return this.toDoService.findAllUserList();

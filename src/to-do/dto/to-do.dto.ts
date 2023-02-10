@@ -10,7 +10,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-// 💡 Translated list history type
+// Translated list history type
 export class TranslatedListHistory {
   @IsNotEmpty()
   translatedItem: string;
