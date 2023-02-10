@@ -8,8 +8,10 @@ import {
 } from '@nestjs/common';
 import {
   UserJwtGuard,
-  AdminRoleGuard,
+  RolesGuard,
+  Roles,
 } from '../auth/guard';
+import { UserRoles } from 'src/user/enums';
 import { UserService } from './user.service';
 
 @Controller('api/users')
@@ -30,13 +32,15 @@ export class UserController {
     );
   }
 
-  @UseGuards(AdminRoleGuard)
+  @UseGuards(UserJwtGuard, RolesGuard)
+  @Roles(UserRoles.ADMIN) // Only aadmin can access
   @Get()
   getAllUsers() {
     return this.usersService.getAllUsers();
   }
 
-  @UseGuards(AdminRoleGuard)
+  @UseGuards(UserJwtGuard, RolesGuard)
+  @Roles(UserRoles.ADMIN) // Only admin can access
   @Delete(':id')
   deleteUser(@Param() params: { id: string }) {
     return this.usersService.deleteUser(
