@@ -1,2 +1,3 @@
 export * from './jwt.guard';
-export * from './admin-role.guard';
+export * from './roles.guard';
+export * from './roles.decorator';
