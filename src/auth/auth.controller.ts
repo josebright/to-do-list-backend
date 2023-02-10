@@ -7,9 +7,11 @@ import {
   Get,
   Req,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Dto } from './dto';
+import { UserJwtGuard } from './guard';
 
 @Controller('api/auth')
 export class AuthController {
@@ -26,6 +28,7 @@ export class AuthController {
     return this.authService.signin(dto, res);
   }
 
+  @UseGuards(UserJwtGuard)
   @HttpCode(HttpStatus.OK)
   @Get('signout')
   signout(@Req() req, @Res() res) {

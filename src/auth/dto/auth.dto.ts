@@ -7,6 +7,7 @@ import {
   Matches,
 } from 'class-validator';
 
+// Data transfer object authentication
 export class Dto {
   @IsEmail()
   @IsNotEmpty()
@@ -21,7 +22,7 @@ export class Dto {
       'Password has to be between 3 and 20 chars',
   })
   @Matches(
-    /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+    /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, //Password should contain black and small alphabet
     { message: 'Password is weak' },
   )
   password: string;
