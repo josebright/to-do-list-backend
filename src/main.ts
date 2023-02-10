@@ -12,10 +12,10 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
+  // create session
   app.use(
     session({
-      secret:
-        'asiodasjoddjdoasddasoidjasiodasdjaiodd',
+      secret: process.env.SECRET,
       saveUninitialized: false,
       resave: false,
       cookie: {
