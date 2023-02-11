@@ -10,7 +10,7 @@ services:
     ports:
       - '5432:5432'
     volumes: 
-      - todolist-dev:/var/lib/postgresql/data
+      - todolist-dev-db:/var/lib/postgresql/data
   test-db:
     image: postgres
     restart: always
@@ -21,7 +21,7 @@ services:
     ports:
       - '5434:5432'
     volumes: 
-      - todolist-test:/var/lib/postgresql/data
+      - todolist-test-db:/var/lib/postgresql/data
 volumes:
-  todolist-dev:
-  todolist-test:
+  todolist-dev-db:
+  todolist-test-db:
