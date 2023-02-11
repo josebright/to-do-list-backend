@@ -16,7 +16,7 @@ import {
   RolesGuard,
   Roles,
 } from '../auth/guard';
-import { UserRoles } from 'src/user/enums';
+import { UserRoles } from '../user/enums';
 
 @Controller('api/to-do')
 export class ToDoController {

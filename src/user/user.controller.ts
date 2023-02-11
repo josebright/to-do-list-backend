@@ -11,7 +11,7 @@ import {
   RolesGuard,
   Roles,
 } from '../auth/guard';
-import { UserRoles } from 'src/user/enums';
+import { UserRoles } from './enums';
 import { UserService } from './user.service';
 
 @Controller('api/users')

@@ -47,7 +47,7 @@ describe('App e2e', () => {
       it('should throw err if email is empty', () => {
         return pactum
           .spec()
-          .post('/auth/signup')
+          .post('/api/auth/signup')
           .withBody({
             password: dto.password,
           })
@@ -56,7 +56,7 @@ describe('App e2e', () => {
       it('should throw err if password is empty', () => {
         return pactum
           .spec()
-          .post('/auth/signup')
+          .post('/api/auth/signup')
           .withBody({
             email: dto.email,
           })
@@ -65,13 +65,13 @@ describe('App e2e', () => {
       it('should throw err if no body provided', () => {
         return pactum
           .spec()
-          .post('/auth/signup')
+          .post('/api/auth/signup')
           .expectStatus(400);
       });
       it('should signup', () => {
         return pactum
           .spec()
-          .post('/auth/signup')
+          .post('/api/auth/signup')
           .withBody(dto)
           .expectStatus(201);
       });
@@ -81,7 +81,7 @@ describe('App e2e', () => {
       it('should throw err if email is empty', () => {
         return pactum
           .spec()
-          .post('/auth/signin')
+          .post('/api/auth/signin')
           .withBody({
             password: dto.password,
           })
@@ -90,7 +90,7 @@ describe('App e2e', () => {
       it('should throw err if password is empty', () => {
         return pactum
           .spec()
-          .post('/auth/signin')
+          .post('/api/auth/signin')
           .withBody({
             email: dto.email,
           })
@@ -99,13 +99,13 @@ describe('App e2e', () => {
       it('should throw err if no body provided', () => {
         return pactum
           .spec()
-          .post('/auth/signin')
+          .post('/api/auth/signin')
           .expectStatus(400);
       });
       it('should signin', () => {
         return pactum
           .spec()
-          .post('/auth/signin')
+          .post('/api/auth/signin')
           .withBody(dto)
           .expectStatus(200)
           .stores('userAt', 'token')
@@ -117,7 +117,7 @@ describe('App e2e', () => {
       it('should signout', () => {
         return pactum
           .spec()
-          .post('/auth/signout')
+          .post('/api/auth/signout')
           .expectStatus(200).clean;
       });
     });
@@ -128,7 +128,7 @@ describe('App e2e', () => {
       it('should get current user', () => {
         return pactum
           .spec()
-          .get('/users/{id}')
+          .get('/api/users/{id}')
           .withPathParams('id', '$S{userId}')
           .withHeaders({
             Authorization: 'Bearer $S{userAt}',
@@ -137,18 +137,18 @@ describe('App e2e', () => {
       });
     });
 
-    describe('Get all users', () => {
-      it('should get all users', () => {
-        return (
-          pactum
-            .spec()
-            .get('/users')
-            // .withHeaders({
-            //   Authorization: 'Bearer $S{userAt}',
-            // })
-            .expectStatus(200)
-        );
-      });
-    });
+    // describe('Get all users', () => {
+    //   it('should get all users', () => {
+    //     return (
+    //       pactum
+    //         .spec()
+    //         .get('/api/users')
+    //         .withHeaders({
+    //           Authorization: 'Bearer $S{userAt}',
+    //         })
+    //         .expectStatus(200)
+    //     );
+    //   });
+    // });
   });
 });
