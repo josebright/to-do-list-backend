@@ -84,7 +84,8 @@ export class AuthService {
       user.id,
       user.email,
     );
-
+    // delete password
+    delete user.password;
     // send back the user signin token
     res.cookie('token', token.access_token);
     return res.send({
