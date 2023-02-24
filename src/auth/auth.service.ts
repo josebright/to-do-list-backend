@@ -34,7 +34,7 @@ export class AuthService {
       });
 
       return res.send({
-        message: 'Account created succefully',
+        message: 'Account created successfully',
       });
     } catch (error) {
       if (
@@ -84,12 +84,14 @@ export class AuthService {
       user.id,
       user.email,
     );
-    // delete password
+    // delete password and creation timestamp
     delete user.password;
+    delete user.createdAt;
+    delete user.updatedAt;
     // send back the user signin token
     res.cookie('token', token.access_token);
     return res.send({
-      message: 'Signed in succefully',
+      message: 'Signed in successfully',
       token: token.access_token,
       user,
     });
@@ -98,11 +100,11 @@ export class AuthService {
   async signout(req: Request, res: Response) {
     res.clearCookie('token');
     return res.send({
-      message: 'Signed out succefully',
+      message: 'Signed out successfully',
     });
   }
 
-  // crate authentication token
+  // create authentication token
   async signToken(
     userId: string,
     email: string,

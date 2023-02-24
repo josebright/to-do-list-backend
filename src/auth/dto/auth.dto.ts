@@ -17,13 +17,16 @@ export class Dto {
 
   @IsString()
   @IsNotEmpty()
-  @Length(3, 20, {
+  @Length(3, 256, {
     message:
-      'Password has to be between 3 and 20 chars',
+      'Password exceed meximium characters',
   })
   @Matches(
     /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, //Password should contain black and small alphabet
-    { message: 'Password is weak' },
+    {
+      message:
+        'Password is weak, it should contain atleast (1 capital letter, 1 number)',
+    },
   )
   password: string;
 }
