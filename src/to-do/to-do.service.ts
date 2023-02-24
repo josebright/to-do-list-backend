@@ -19,15 +19,17 @@ export class ToDoService {
     const { item } = dto;
 
     // create list with user information
-    await this.prisma.listItem.create({
-      data: {
-        userId: decodedUser.id,
-        item,
-      },
-    });
+    const todo =
+      await this.prisma.listItem.create({
+        data: {
+          userId: decodedUser.id,
+          item,
+        },
+      });
 
     return {
       message: 'List created succefully',
+      todo,
     };
   }
 
