@@ -7,6 +7,10 @@ import * as passport from 'passport';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    credentials: true,
+    origin: 'http://localhost:4200',
+  });
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
