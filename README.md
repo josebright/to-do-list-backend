@@ -24,12 +24,31 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Nest](https://github.com/nestjs/nest) framework TypeScript ToDo Application API.
 
-## Installation
+## Installation & Setup
 
 ```bash
+# Import npm packages 
 $ npm install
+
+# Setup .env and .env-test file
+$ PORT=""
+$ DATABASE_URL="postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/${POSTGRES_DB}?schema=public"
+$ POSTGRES_DB=""
+$ POSTGRES_USER=""
+$ POSTGRES_PASSWORD=""
+$ SECRET=""
+
+# Setup postgress with docker for development environment
+$ npm run db:dev:restart
+
+# Setup postgress with docker for test environment
+$ npm run db:test:restart
+
+# Migrate prisma and deployment
+$ prisma migrate dev
+$ prisma migrate deploy
 ```
 
 ## Running the app
@@ -68,25 +87,9 @@ $ npx prisma studio
 $ npx dotenv -e .env.test -- prisma studio
 ```
 
-## Restart Database
-
-```bash
-# restart dev database
-$ npm run db:dev:restart
-
-# restart test database
-$ npm run db:test:restart
-```
-
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 
